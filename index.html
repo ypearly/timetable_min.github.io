@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>25학년도 2학기 시간표 조회</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <h1>25학년도 2학기 시간표 조회</h1>
+        
+        <div class="controls">
+            <label for="department">학과:</label>
+            <select id="department"></select>
+
+            <label for="grade">학년:</label>
+            <select id="grade"></select>
+
+            <label for="class">반:</label>
+            <select id="class"></select>
+        </div>
+
+        <div id="timetable-container">
+            <p>학과, 학년, 반을 선택하면 시간표가 나타납니다.</p>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
