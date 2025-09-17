@@ -104,32 +104,31 @@ function displayTimetable(data) {
     const thead = document.createElement('thead');
     const tbody = document.createElement('tbody');
 
-    // 헤더 (교시) 생성
+    // 헤더 (요일) 생성
+    const days = ['월', '화', '수', '목', '금'];
     const headerRow = document.createElement('tr');
-    headerRow.innerHTML = `<th></th>
-                           <th>1교시</th><th>2교시</th><th>3교시</th><th>4교시</th><th>5교시</th><th>6교시</th><th>7교시</th>`;
+    headerRow.innerHTML = `<th>교시</th>` + days.map(day => `<th>${day}</th>`).join('');
     thead.appendChild(headerRow);
     table.appendChild(thead);
 
-    // 데이터 (요일별 과목) 생성
-    const days = ['월', '화', '수', '목', '금'];
-    days.forEach(day => {
+    // 데이터 (교시별 과목) 생성
+    for (let i = 1; i <= 7; i++) {
         const row = document.createElement('tr');
-        const dayHeader = document.createElement('th');
-        dayHeader.textContent = day;
-        row.appendChild(dayHeader);
+        const periodHeader = document.createElement('th');
+        periodHeader.textContent = `${i}교시`;
+        row.appendChild(periodHeader);
 
-        for (let i = 1; i <= 7; i++) {
+        days.forEach(day => {
             const cell = document.createElement('td');
             const subject = timetableData[`${day}${i}`] || '';
             cell.textContent = subject;
             row.appendChild(cell);
-        }
+        });
         tbody.appendChild(row);
-    });
+    }
     table.appendChild(tbody);
 
     container.appendChild(table);
-
 }
+
 
