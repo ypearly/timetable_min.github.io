@@ -32,7 +32,6 @@ const csvData = `학과,학년,반,월1,화1,수1,목1,금1,월2,화2,수2,목2,
 
 // --- 코드 시작 --- //
 document.addEventListener('DOMContentLoaded', () => {
-    // CSV 데이터를 파싱하여 객체 배열로 변환
     Papa.parse(csvData, {
         header: true,
         skipEmptyLines: true,
@@ -40,7 +39,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const parsedData = results.data;
             populateDropdowns(parsedData);
             
-            // 드롭다운 메뉴 변경 감지
             document.getElementById('department').addEventListener('change', () => filterAndDisplay(parsedData));
             document.getElementById('grade').addEventListener('change', () => filterAndDisplay(parsedData));
             document.getElementById('class').addEventListener('change', () => filterAndDisplay(parsedData));
@@ -53,7 +51,6 @@ function populateDropdowns(data) {
     const grades = [...new Set(data.map(item => item.학년))];
     const classes = [...new Set(data.map(item => item.반))];
 
-    // 드롭다운 메뉴 채우기
     populateSelect('department', departments);
     populateSelect('grade', grades);
     populateSelect('class', classes);
@@ -61,7 +58,7 @@ function populateDropdowns(data) {
 
 function populateSelect(selectId, options) {
     const selectElement = document.getElementById(selectId);
-    selectElement.innerHTML = `<option value="">선택</option>`; // 기본 '선택' 옵션 추가
+    selectElement.innerHTML = `<option value="">선택</option>`;
     options.forEach(option => {
         const opt = document.createElement('option');
         opt.value = option;
@@ -81,7 +78,6 @@ function filterAndDisplay(data) {
         (selectedClass === "" || item.반 === selectedClass)
     );
     
-    // 조건이 모두 선택되었을 때만 시간표 표시
     if (selectedDept && selectedGrade && selectedClass) {
         displayTimetable(filteredData);
     } else {
@@ -91,14 +87,14 @@ function filterAndDisplay(data) {
 
 function displayTimetable(data) {
     const container = document.getElementById('timetable-container');
-    container.innerHTML = ''; // 기존 시간표 지우기
+    container.innerHTML = '';
 
     if (data.length === 0) {
         container.innerHTML = '<p>해당하는 시간표가 없습니다.</p>';
         return;
     }
 
-    const timetableData = data[0]; // 필터링 결과는 한 줄만 있을 것
+    const timetableData = data[0];
 
     const table = document.createElement('table');
     const thead = document.createElement('thead');
@@ -130,5 +126,3 @@ function displayTimetable(data) {
 
     container.appendChild(table);
 }
-
-
